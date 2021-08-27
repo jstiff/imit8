@@ -5,8 +5,8 @@
  change `prime_app` to the name of your database, and you should be all set!
 */
 
-import pg from 'pg';
-import url from 'url';
+const pg = require('pg');
+const url = require('url');
 
 let config = {};
 
@@ -45,4 +45,5 @@ pool.on('error', (err) => {
 	console.log('Unexpected error on idle client', err);
 	process.exit(-1);
 });
-export default pool;
+
+module.exports = pool;

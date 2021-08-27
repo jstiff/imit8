@@ -1,9 +1,13 @@
-import express from 'express';
+const express = require('express');
 const router = express.Router();
-import gitHub_Strategy from '../strategies/github.strategy.js';
-
-import { rejectUnauthenticated } from '../modules/authentication.middleware.js';
-import config from '../config.js';
+const gitHub_Strategy = require('../strategies/github.strategy');
+const cors = require('cors');
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
+const { home_redirect_url } = require('../config');
+const corsOptions1 = {
+	credentials: true,
+	origin: 'http://localhost:5000/authenticate/auth/github'
+};
 
 // try to use middleware like rejectUnauthentiated
 router.get('/check', rejectUnauthenticated, (req, res) => {
@@ -58,12 +62,12 @@ router.get(
 	'/auth/github/callback',
 
 	gitHub_Strategy.authenticate('github', {
-		successRedirect: config.home_redirect_url,
+		successRedirect: home_redirect_url,
 		failureRedirect: '/login/failed'
 	})
 );
 
-export default router;
+module.exports = router;
 
 // router.get("/userState", (req, res) => {
 // 	console.log("inside userSTate route");

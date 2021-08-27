@@ -13,4 +13,4 @@ const rejectUnauthenticated = (req, res, next) => {
 	}
 };
 
-export { rejectUnauthenticated };
+module.exports = { rejectUnauthenticated };

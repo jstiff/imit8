@@ -1,10 +1,10 @@
-import passport from 'passport';
-import { Strategy as GitHubStrategy } from 'passport-github2';
-//const Strategy = GitHubStrategy.Strategy();
-import pool from '../modules/pool.js';
-import config from '../config.js';
-const { client_id, client_secret } = config;
+const passport = require('passport');
+const GitHubStrategy = require('passport-github2').Strategy;
+const pool = require('../modules/pool');
 
+const { client_id, client_secret } = require('../config');
+
+// this function stuffs a session cookie with the 'uid' from the database.
 passport.serializeUser((user, done) => {
 	console.log('4 INSIDE SERIALIZE', user.gitHubId);
 	done(null, user.profile.id);
@@ -63,4 +63,4 @@ passport.use(
 	)
 );
 
-export default passport;
+module.exports = passport;

@@ -1,7 +1,7 @@
 // No changes should be required in this file
 
-import warnings from '../constants/warnings.js';
-import cookieSession from 'cookie-session';
+const warnings = require('../constants/warnings');
+const cookieSession = require('cookie-session');
 
 /*
   The cookie session makes it so a user can enters their username and password one time,
@@ -27,7 +27,24 @@ const serverSessionSecret = () => {
 };
 const IN_PRODUCTION = process.env.NODE_ENV === 'production';
 
-let cookie = cookieSession({
+// module.exports = session({
+//   secret: serverSessionSecret() || "poopie secret",
+//   resave: false,
+//   saveUninitialized: false,
+//   // store: new pgSession({
+//   //   pool: session_pool,
+//   //   tableName: "session_user",
+//   //   conString: "postgres://postgres:postgres@localhost:5432/imitate_app",
+//   // }),
+//   cookie: {
+//     secure: IN_PRODUCTION,
+//     httpOnly: true,
+//     sameSite: true,
+//     maxAge: 1000 * 60 * 60 * 1,
+//   },
+// });
+
+module.exports = cookieSession({
 	secret: serverSessionSecret() || 'secret', // please set this in your .env file
 	key: 'imitate_user', // this is the name of the req.variable. 'user' is convention, but not required
 	resave: 'false',
@@ -35,5 +52,3 @@ let cookie = cookieSession({
 	maxAge: 24 * 60 * 60 * 1000, // Set to 1 hour - 60 min/hour * 60 s/min * 1000 ms/s
 	secure: IN_PRODUCTION
 });
-
-export { cookie, serverSessionSecret };

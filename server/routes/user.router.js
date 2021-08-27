@@ -1,7 +1,7 @@
-import express from 'express';
-import { rejectUnauthenticated } from '../modules/authentication.middleware.js';
-import pool from '../modules/pool.js';
-import moment from 'moment';
+const express = require('express');
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
+const pool = require('../modules/pool');
+const moment = require('moment');
 const router = express.Router();
 
 // *************passport implementation of oAuth*************************
@@ -146,4 +146,4 @@ router.post('/logout', (req, res) => {
 	res.sendStatus(200);
 });
 
-export default router;
+module.exports = router;

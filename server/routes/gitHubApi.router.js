@@ -1,7 +1,7 @@
-import express from 'express';
+const express = require('express');
 const router = express.Router();
-import Axios from 'axios';
-import { rejectUnauthenticated } from '../modules/authentication.middleware.js';
+const Axios = require('axios');
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
 router.post('/content', rejectUnauthenticated, (req, res) => {
 	const content_url = `${req.body.url}?client_id=${process.env.GITHUB_ClIENT_ID}&client_secret=${process.env.GITHUB_CLIENT_SECRET}`;
@@ -95,4 +95,4 @@ router.post('/', rejectUnauthenticated, (req, res) => {
 			res.sendStatus(500);
 		});
 });
-export default router;
+module.exports = router;
