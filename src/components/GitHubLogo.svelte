@@ -1,6 +1,3 @@
-<script>
-</script>
-
 <main>
 	<a href="/login">
 		<img

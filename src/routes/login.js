@@ -3,6 +3,7 @@
 const target = 'https://github.com/login/oauth/authorize';
 
 export async function get(request) {
+	console.log('INSIDE GET', request.locals);
 	const state = 'this9?1!isMe';
 
 	return {

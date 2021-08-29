@@ -2,7 +2,7 @@
 	//import Logo from './Logo.svelte';
 	import Hamburger from './Hamburger.svelte';
 	import Menu from './Menu.svelte';
-
+	export let user1;
 	export let sidebar = false;
 </script>
 
@@ -11,5 +11,5 @@
 		<Hamburger bind:open={sidebar} />
 	</nav>
 
-	<Menu />
+	<Menu user2={user1} />
 </header>
