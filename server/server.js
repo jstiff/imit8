@@ -1,4 +1,4 @@
-require('dotenv').config();
+// require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 //const bodyParser = require("body-parser");
@@ -33,7 +33,10 @@ app.use(
 		methods: 'GET,HEAD,PUT,PATCH,POST,DELETE'
 	})
 );
-
+app.get('/test', (req, res) => {
+	console.log('REACHED');
+	res.send({ title: 'GeeksforGeeks' });
+});
 app.use('/authenticate', oAuthRouter);
 app.use('/api/user/', userRouter);
 app.use('/api/gitHub/', gitHubApiRouter);

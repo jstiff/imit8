@@ -1,13 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const gitHub_Strategy = require('../strategies/github.strategy');
-const cors = require('cors');
+//const cors = require('cors');
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 const { home_redirect_url } = require('../config');
-const corsOptions1 = {
-	credentials: true,
-	origin: 'http://localhost:5000/authenticate/auth/github'
-};
+// const corsOptions1 = {
+// 	credentials: true,
+// 	origin: 'http://localhost:5000/authenticate/auth/github'
+// };
 
 // try to use middleware like rejectUnauthentiated
 router.get('/check', rejectUnauthenticated, (req, res) => {
@@ -62,9 +62,11 @@ router.get(
 	'/auth/github/callback',
 
 	gitHub_Strategy.authenticate('github', {
-		successRedirect: home_redirect_url,
 		failureRedirect: '/login/failed'
-	})
+	}),
+	function (req, res) {
+		res.send({ user: req.user });
+	}
 );
 
 module.exports = router;
